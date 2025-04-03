@@ -53,8 +53,8 @@ function start(){
         let whitespace = false;
         for(let c = 0;c<characterTree[w].length;c++){
             console.log(characterTree[w][c]);
-            if(characterTree[w][c] == " ") return whitespace = true;
-            typewriterHTML += `<span id="typewriter-char-${c}">${characterTree[w][c]}</span>`;
+            if(characterTree[w][c] != " ") typewriterHTML += `<span id="typewriter-char-${c}">${characterTree[w][c]}</span>`;;
+            if(characterTree[w][c] == " ") whitespace = true;
         }
         if(whitespace) typewriterHTML += " "
         typewriterHTML += `</span>`
