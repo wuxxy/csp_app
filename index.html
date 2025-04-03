@@ -20,11 +20,11 @@
                 <!-- Timer Container -->
                 <div class="relative w-full h-10 bg-red-800 bg-opacity-50 rounded-md overflow-hidden shadow-inner">
                   <!-- Timer Fill (to be controlled by JS) -->
-                  <span class="absolute left-0 top-0 h-full bg-red-600 transition-all duration-1000 ease-linear" style="width: 100%;"></span>
+                  <span id="timer-bar" class="absolute left-0 top-0 h-full bg-red-600 transition-all duration-1000 ease-linear" style="width: 100%;"></span>
               
                   <!-- Seconds Text -->
                   <div class="absolute inset-0 flex items-center justify-center z-10">
-                    <span class="text-white font-semibold text-sm tracking-wide">30s left</span>
+                    <span id="timer-label" class="text-white font-semibold text-sm tracking-wide">30s left</span>
                   </div>
                 </div>
               
@@ -70,6 +70,7 @@
             <!-- Restart Button -->
             <div class="flex justify-center">
             <button
+                id="start"
                 class="bg-pink-600 text-white px-6 py-2 rounded-xl text-lg hover:bg-blue-700 transition shadow-md"
             >
                 🔄 Start Test
@@ -78,5 +79,6 @@
             
         </div>
     </main>
+    <script src="index.js"></script>
 </body>
 </html>
