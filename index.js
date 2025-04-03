@@ -6,8 +6,8 @@ let currentlyPlaying = false;
 let timer;
 
 // Document Elements
-const timer_label = document.getElementByID("timer-label");
-const timer_bar = document.getElementByID("timer-bar");
+const timer_label = document.getElementById("timer-label");
+const timer_bar = document.getElementById("timer-bar");
 // Event Listeners
 document.getElementById("start").addEventListener("click", () => {
     currentlyPlaying = true;
