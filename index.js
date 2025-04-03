@@ -84,6 +84,8 @@ function loadText(){
     words.forEach(word => {
         characterTree.push(word.split(""));    
     });
+    console.log(characterTree);
+    
     return {words, characterTree}
 
 }
