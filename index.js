@@ -17,13 +17,13 @@ document.getElementById("start").addEventListener("click", () => {
   
         if (timer <= 0) {
           clearInterval(interval);
-          label.textContent = "0s left";
+          timer_label.textContent = "0s left";
           timer_bar.style.width = "0%";
           return;
         }
   
         // Update label and fill width
-        label.textContent = `${timer}s left`;
+        timer_label.textContent = `${timer}s left`;
         const progress = (timer / timeSelected) * 100;
         timer_bar.style.width = `${progress}%`;
     }, 1000);
