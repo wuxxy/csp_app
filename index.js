@@ -4,6 +4,8 @@ let attempts = []
 
 let currentlyPlaying = false;
 let timer;
+let tree;
+let index = 0;
 // Generated using ChatGPT
 const typingTexts = [
     `It was the best of times, it was the worst of times, it was the age of wisdom, it was the age of foolishness. It was the epoch of belief, it was the epoch of incredulity. We had everything before us, we had nothing before us.
@@ -37,6 +39,8 @@ const timer_bar = document.getElementById("timer-bar");
 const typewriter = document.getElementById("typewriter");
 // Event Listeners
 document.getElementById("start").addEventListener("click", start);
+document.getElementById("typer").addEventListener("keydown", handleChar);
+
 
 // Functions
 function start(){
@@ -48,12 +52,14 @@ function start(){
     const {words, characterTree} = loadText();
     const wordAmount = words.length;
     let typewriterHTML = "";
+    let charLength = 0;
     for(let w = 0;w<characterTree.length;w++){
         typewriterHTML += `<span id="typewriter-word-${w}">`;
         let whitespace = false;
         for(let c = 0;c<characterTree[w].length;c++){
             console.log(characterTree[w][c]);
-            if(characterTree[w][c] != " ") typewriterHTML += `<span id="typewriter-char-${c}">${characterTree[w][c]}</span>`;;
+            charLength++;
+            if(characterTree[w][c] != " ") typewriterHTML += `<span id="typewriter-char-${charLength}">${characterTree[w][c]}</span>`;;
             if(characterTree[w][c] == " ") whitespace = true;
         }
         typewriterHTML += `</span>`
@@ -91,7 +97,13 @@ function loadText(){
         characterTree.push([...word.split(""), " "]);
     });
     console.log(characterTree);
-    
+    tree = characterTree;
     return {words, characterTree}
 
+}
+
+function handleChar(e){
+    e.preventDefault();
+    console.log(e.getKey());
+    
 }
