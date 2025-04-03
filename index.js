@@ -50,11 +50,13 @@ function start(){
     let typewriterHTML = "";
     for(let w = 0;w<characterTree.length;w++){
         typewriterHTML += `<span id="typewriter-word-${w}">`;
+        let whitespace = false;
         for(let c = 0;c<characterTree[w].length;c++){
             console.log(characterTree[w][c]);
-            
+            if(characterTree[w][c] == " ") return whitespace = true;
             typewriterHTML += `<span id="typewriter-char-${c}">${characterTree[w][c]}</span>`;
         }
+        if(whitespace) typewriterHTML += " "
         typewriterHTML += `</span>`
     }
     typewriter.innerHTML=typewriterHTML;
