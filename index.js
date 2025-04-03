@@ -50,6 +50,7 @@ function start(){
     for(let w = 0;w<words.length;w++){
         typewriter.innerHTML += " " + `<span id="typewriter-word-${w}">${words[w]}</span>`;
     }
+    typewriter.children[0].classList.add("highlight-typing");
     // Timer
     const interval = setInterval(() => {
         timer--;
@@ -67,6 +68,7 @@ function start(){
         timer_bar.style.width = `${progress}%`;
     }, 1000);
     // Typewriter
+
 
 }
 function loadText(){
