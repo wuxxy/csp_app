@@ -104,6 +104,6 @@ function loadText(){
 
 function handleChar(e){
     e.preventDefault();
-    console.log(e.getKey());
+    console.log(e.key);
     
 }
