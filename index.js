@@ -70,7 +70,7 @@ function start(){
 }
 function loadText(){
     // Pick text
-    const pickedText = typingTexts[Math.floor(Math.random() * arr.length)];
+    const pickedText = typingTexts[Math.floor(Math.random() * typingTexts.length)];
     // Extract words
     const words = pickedText.split(" ");
     let characterTree = []
