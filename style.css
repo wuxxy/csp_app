@@ -5,3 +5,8 @@ body {
 .time-selected{
     background-color: palevioletred;
 }
+.highlight-typing{
+    background: rgba(148, 142, 142, 0.558);
+    font-weight: 400;
+    padding: 2px;
+}
