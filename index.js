@@ -48,7 +48,7 @@ function start(){
     const {words, characterTree} = loadText();
     const wordAmount = words.length;
     for(let w = 0;w<words.length;w++){
-        typewriter.innerHTML += "" + `<span id="typewriter-word-${w}">${words[w]}</span>`;
+        typewriter.innerHTML += " " + `<span id="typewriter-word-${w}">${words[w]}</span>`;
     }
     // Timer
     const interval = setInterval(() => {
