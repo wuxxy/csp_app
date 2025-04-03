@@ -3,5 +3,5 @@ body {
     font-style: normal;
 }
 .time-selected{
-    @apply bg-pink-600;
+    background-color: palevioletred;
 }
