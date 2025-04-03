@@ -50,6 +50,8 @@ function start(){
     for(let w = 0;w<characterTree.length;w++){
         typewriter.innerHTML += `<span id="typewriter-word-${w}">`;
         for(let c = 0;c<characterTree[w].length;c++){
+            console.log(characterTree[w][c]);
+            
             typewriter.innerHTML += `<span id="typewriter-char-${c}">${characterTree[w][c]}</span>`;
         }
         typewriter.innerHTML += `</span>`
