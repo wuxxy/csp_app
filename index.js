@@ -47,15 +47,17 @@ function start(){
     typewriter.innerHTML = "";
     const {words, characterTree} = loadText();
     const wordAmount = words.length;
+    let typewriterHTML = "";
     for(let w = 0;w<characterTree.length;w++){
-        typewriter.innerHTML += `<span id="typewriter-word-${w}">`;
+        typewriterHTML += `<span id="typewriter-word-${w}">`;
         for(let c = 0;c<characterTree[w].length;c++){
             console.log(characterTree[w][c]);
             
-            typewriter.innerHTML += `<span id="typewriter-char-${c}">${characterTree[w][c]}</span>`;
+            typewriterHTML += `<span id="typewriter-char-${c}">${characterTree[w][c]}</span>`;
         }
-        typewriter.innerHTML += `</span>`
+        typewriterHTML += `</span>`
     }
+    typewriter.innerHTML=typewriterHTML;
     typewriter.children[0].classList.add("highlight-typing");
     // Timer
     const interval = setInterval(() => {
