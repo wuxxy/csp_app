@@ -82,7 +82,7 @@ function loadText(){
     const words = pickedText.split(" ");
     let characterTree = []
     words.forEach(word => {
-        characterTree.push(word.split("").push(" "));
+        characterTree.push([...word.split(""), " "]);
     });
     console.log(characterTree);
     
