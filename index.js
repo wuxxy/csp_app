@@ -65,12 +65,21 @@ const typer = document.getElementById("typer")
 const stats_accuracy = document.getElementById("stats-accuracy");
 
 // Event Listeners
-document.getElementById("start").addEventListener("click", start);
+document.getElementById(typer).addEventListener("keydown", start);
 typer.addEventListener("keydown", handleChar);
 
-
+function restart(){
+  currentlyPlaying = false;
+  timer;
+  tree;
+  char_index = 0;
+  word_index = 0;
+  typed = [];
+  wrong_chars = 0;
+}
 // Functions
 function start(){
+    if(currentlyPlaying) return;
     // Load
     
     currentlyPlaying = true;
@@ -137,6 +146,9 @@ function handleChar(e){
   let pressedSpace;
   if(disallowedCodes.includes(key_pressed)) return;
   typer.value = ""; 
+  // =============
+  // HANDLE DELETE
+  // =============
   if(key_pressed == "Backspace" || key_pressed == "Delete") {
     if(get_typewriter_char(char_index).innerText == " " && word_index > 0) {
       typewriter.children[2*word_index].classList.remove("highlight-typing")
@@ -152,6 +164,9 @@ function handleChar(e){
     }
     get_typewriter_next_char.classList.remove("correct-char")
     return;
+    // =============
+    // HANDLE SPACE
+    // =============
   }else if(key_pressed == " "){
     console.log("== SPACE == ")
     pressedSpace = true;
@@ -161,6 +176,9 @@ function handleChar(e){
     typewriter.children[2*word_index].classList.add("highlight-typing")
   }
     else{
+    // =============
+    // HANDLE REGULAR KEY PRESS
+    // =============
     typed.push(key_pressed);
     char_index++;
   };
