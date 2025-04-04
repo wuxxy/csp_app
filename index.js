@@ -171,7 +171,7 @@ function handleChar(e){
     current_typewriter_char.classList.remove("correct-char")
 
   }
-  stats_accuracy.innerText = (typed.length-wrong_chars)/(typed.length) + "%"
+  stats_accuracy.innerText = (((typed.length-wrong_chars)/(typed.length))*100).toFixed(2) + "%"
   console.log("TYPED",typed, "CHAR_INDEX:", char_index, " | WORD INDEX:", word_index)
   
 }
