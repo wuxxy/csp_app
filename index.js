@@ -128,7 +128,7 @@ function get_typewriter_char(i){
 }
 function handleChar(e){
   if(!currentlyPlaying) return;
-  const current_typewriter_char = get_typewriter_char(char_index+1);
+  const current_typewriter_char = get_typewriter_char(char_index);
   const key_pressed = e.key;
   let pressedSpace;
   if(disallowedCodes.includes(key_pressed)) return;
