@@ -65,7 +65,7 @@ const typer = document.getElementById("typer")
 const stats_accuracy = document.getElementById("stats-accuracy");
 
 // Event Listeners
-document.getElementById(typer).addEventListener("keydown", start);
+typer.addEventListener("keydown", start);
 typer.addEventListener("keydown", handleChar);
 
 function restart(){
