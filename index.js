@@ -6,7 +6,7 @@ let currentlyPlaying = false;
 let timer;
 let tree;
 let index = 0;
-let typed = "";
+let typed = [];
 // Generated using ChatGPT
 const typingTexts = [
     `It was the best of times, it was the worst of times, it was the age of wisdom, it was the age of foolishness. It was the epoch of belief, it was the epoch of incredulity. We had everything before us, we had nothing before us.
@@ -126,12 +126,12 @@ function loadText(){
 function handleChar(e){
   const key = e.key;
   if(disallowedCodes.includes(key)) return;
-  typer.innerHTML = "";
+  typer.innerHTML = ""; 
   if(key == "Backspace" || key == "Delete") {
-    typed = [...typed].splice(index, 1);
+    typed.splice(index, 1);
     if(index > 0) index--;
   }else{
-    typed += key;
+    typed.push(key);
     index++;
     
     
