@@ -134,7 +134,11 @@ function handleChar(e){
   if(disallowedCodes.includes(key_pressed)) return;
   typer.value = ""; 
   if(key_pressed == "Backspace" || key_pressed == "Delete") {
-    if(current_typewriter_char.innerText == " " && word_index > 0) word_index--;
+    if(current_typewriter_char.innerText == " " && word_index > 0) {
+      typewriter.children[2*word_index].classList.remove("highlight-typing")
+      word_index--;
+      typewriter.children[2*word_index].classList.add("highlight-typing")
+    };
     typed.splice(char_index-1, 1);
     if(char_index > 0) char_index--;
     get_typewriter_char(char_index+1).classList.remove("wrong-char")
