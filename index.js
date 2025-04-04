@@ -8,6 +8,7 @@ let tree;
 let char_index = 0;
 let word_index = 0;
 let typed = [];
+let wrong_chars = 0;
 // Generated using ChatGPT
 const typingTexts = [
     `It was the best of times, it was the worst of times, it was the age of wisdom, it was the age of foolishness. It was the epoch of belief, it was the epoch of incredulity. We had everything before us, we had nothing before us.
@@ -137,7 +138,7 @@ function handleChar(e){
     if(get_typewriter_char(char_index).innerText == " " && word_index > 0) {
       typewriter.children[2*word_index].classList.remove("highlight-typing")
       word_index--;
-      typewriter.children[word_index].classList.add("highlight-typing")
+      typewriter.children[2*word_index].classList.add("highlight-typing")
     };
     typed.splice(char_index-1, 1);
     if(char_index > 0) char_index--;
@@ -160,7 +161,9 @@ function handleChar(e){
   if((current_typewriter_char.innerText == key_pressed) || (pressedSpace && !current_typewriter_char)){
     current_typewriter_char.classList.add("correct-char")
     current_typewriter_char.classList.remove("wrong-char")
+    wrong_chars--;
   }else{
+    wrong_chars++;
     current_typewriter_char.classList.add("wrong-char")
     current_typewriter_char.classList.remove("correct-char")
 

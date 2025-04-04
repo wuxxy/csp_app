@@ -12,7 +12,7 @@ body {
 }
 .correct-char{
     color: rgb(82, 208, 82);
-    background-color: rgba(90, 255, 0, 0.095);
+    background-color: rgba(226, 226, 226, 0.095);
 }
 .wrong-char{
     color: rgb(208, 82, 82);
