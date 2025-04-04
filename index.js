@@ -128,7 +128,7 @@ function handleChar(e){
   if(disallowedCodes.includes(key)) return;
   typer.innerHTML = "";
   if(key == "Backspace" || key == "Delete") {
-    typed[index-1]="";
+    typed.splice(index, 1);
     if(index > 0) index--;
   }else{
     typed += key;
