@@ -122,20 +122,26 @@ function loadText(){
     return {words, characterTree}
 
 }
-
+function get_typewriter_char(i){
+  return document.getElementById(`typewriter-char-${i}`)
+}
 function handleChar(e){
-  const key = e.key;
-  if(disallowedCodes.includes(key)) return;
+  const key_pressed = e.key;
+  if(disallowedCodes.includes(key_pressed)) return;
   typer.value = ""; 
-  if(key == "Backspace" || key == "Delete") {
+  if(key_pressed == "Backspace" || key_pressed == "Delete") {
     typed.splice(index-1, 1);
     if(index > 0) index--;
   }else{
-    typed.push(key);
+    typed.push(key_pressed);
     index++;
-    
-    
   };
+  const current_typewriter_char = get_typewriter_char(index);
+  if(current_typewriter_char.textContent == key_pressed){
+    current_typewriter_char.classList.add("correct-char")
+  }else{
+    current_typewriter_char.classList.add("wrong-char")
+  }
   console.log("TYPED",typed, "INDEX", index)
   
 }

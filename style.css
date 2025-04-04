@@ -10,3 +10,9 @@ body {
     font-weight: 400;
     padding: 2px;
 }
+.correct-char{
+    color: rgb(82, 208, 82);
+}
+.wrong-char{
+    color: rgb(82, 208, 82);
+}
