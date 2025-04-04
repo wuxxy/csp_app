@@ -125,6 +125,7 @@ function loadText(){
 
 function handleChar(e){
   const key = e.key;
+  console.log("TYPED",typed, "INDEX", index)
   if(disallowedCodes.includes(key)) return;
   typer.innerHTML = "";
   if((key == "Backspace" || key == "Delete") && index > 0) {
@@ -133,7 +134,7 @@ function handleChar(e){
   }else{
     typed += key;
     index++;
-    console.log(typed);
+    
     
   };
   
