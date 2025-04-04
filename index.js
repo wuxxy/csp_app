@@ -50,7 +50,8 @@ const disallowedCodes = [
   "ContextMenu",
   "Pause",
   "NumLock", "ScrollLock",
-  "PrintScreen"
+  "PrintScreen",
+  "Meta"
 ];
 
 // Document Elements
@@ -124,12 +125,7 @@ function loadText(){
 function handleChar(e){
   const key = e.key;
   e.preventDefault();
-  let allowedChar = true;
-  for (let i = 0; index < disallowedCodes.length; i++) {
-    const element = disallowedCodes[index];
-    if(element == key) return allowedChar = false;
-  }
-  if(!allowedChar) return;
+  if(disallowedCodes.includes(key)) return;
   if(key == "Backspace" && index !=0) {
     typed[index]="";
     index--;
