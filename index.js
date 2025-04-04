@@ -128,7 +128,7 @@ function get_typewriter_char(i){
 }
 function handleChar(e){
   if(!currentlyPlaying) return;
-  const current_typewriter_char = get_typewriter_char(char_index);
+  const current_typewriter_char = get_typewriter_char(char_index+1);
   const key_pressed = e.key;
   let pressedSpace;
   if(disallowedCodes.includes(key_pressed)) return;
@@ -137,8 +137,8 @@ function handleChar(e){
     if(current_typewriter_char.innerText == " " && word_index > 0) word_index--;
     typed.splice(char_index-1, 1);
     if(char_index > 0) char_index--;
-    current_typewriter_char.classList.remove("wrong-char")
-    current_typewriter_char.classList.remove("correct-char")
+    get_typewriter_char(char_index).classList.remove("wrong-char")
+    get_typewriter_char(char_index).classList.remove("correct-char")
     return;
   }else if(key_pressed == " "){
     console.log("== SPACE == ")
