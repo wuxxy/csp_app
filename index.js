@@ -56,7 +56,6 @@ const disallowedCodes = [
   "Meta"
 ];
 
-let {words, characterTree} = loadText();
 
 // Document Elements
 const timer_label = document.getElementById("timer-label");
@@ -65,6 +64,7 @@ const typewriter = document.getElementById("typewriter");
 const typer = document.getElementById("typer")
 
 const stats_accuracy = document.getElementById("stats-accuracy");
+let {words, characterTree} = loadText();
 
 // Event Listeners
 typer.addEventListener("keydown", start);
