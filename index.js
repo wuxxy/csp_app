@@ -61,6 +61,9 @@ const timer_label = document.getElementById("timer-label");
 const timer_bar = document.getElementById("timer-bar");
 const typewriter = document.getElementById("typewriter");
 const typer = document.getElementById("typer")
+
+const stats_accuracy = document.getElementById("stats-accuracy");
+
 // Event Listeners
 document.getElementById("start").addEventListener("click", start);
 typer.addEventListener("keydown", handleChar);
@@ -168,6 +171,7 @@ function handleChar(e){
     current_typewriter_char.classList.remove("correct-char")
 
   }
+  stats_accuracy.innerText = (typed.length-wrong_chars)/(typed.length) + "%"
   console.log("TYPED",typed, "CHAR_INDEX:", char_index, " | WORD INDEX:", word_index)
   
 }
