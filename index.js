@@ -78,7 +78,10 @@ function restart(){
   word_index = 0;
   typed = [];
   wrong_chars = 0;
-  {words, characterTree} = loadText()
+  const reloadText = loadText()
+  words = reloadText.words;
+  characterTree = reloadText.words;
+
 }
 // Functions
 function start(){
