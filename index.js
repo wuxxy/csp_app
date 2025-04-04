@@ -126,6 +126,7 @@ function get_typewriter_char(i){
   return document.getElementById(`typewriter-char-${i}`)
 }
 function handleChar(e){
+  if(!currentlyPlaying) return;
   const key_pressed = e.key;
   if(disallowedCodes.includes(key_pressed)) return;
   typer.value = ""; 
