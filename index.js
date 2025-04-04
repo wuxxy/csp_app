@@ -145,8 +145,12 @@ function handleChar(e){
     };
     typed.splice(char_index-1, 1);
     if(char_index > 0) char_index--;
-    get_typewriter_char(char_index+1).classList.remove("wrong-char")
-    get_typewriter_char(char_index+1).classList.remove("correct-char")
+    let get_typewriter_next_char = get_typewriter_char(char_index+1);
+    if(get_typewriter_next_char.classList.contains("wrong-char")){
+      get_typewriter_next_char.classList.remove("wrong-char")
+      wrong_chars--;
+    }
+    get_typewriter_next_char.classList.remove("correct-char")
     return;
   }else if(key_pressed == " "){
     console.log("== SPACE == ")
