@@ -56,6 +56,8 @@ const disallowedCodes = [
   "Meta"
 ];
 
+let {words, characterTree} = loadText();
+
 // Document Elements
 const timer_label = document.getElementById("timer-label");
 const timer_bar = document.getElementById("timer-bar");
@@ -76,6 +78,7 @@ function restart(){
   word_index = 0;
   typed = [];
   wrong_chars = 0;
+  {words, characterTree} = loadText()
 }
 // Functions
 function start(){
@@ -85,7 +88,6 @@ function start(){
     currentlyPlaying = true;
     timer = timeSelected;
     typewriter.innerHTML = "";
-    const {words, characterTree} = loadText();
     let typewriterHTML = "";
     let charLength = 0;
     for(let w = 0;w<characterTree.length;w++){
