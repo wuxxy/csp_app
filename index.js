@@ -5,7 +5,8 @@ let attempts = []
 let currentlyPlaying = false;
 let timer;
 let tree;
-let index = 0;
+let char_index = 0;
+let word_index = 0;
 let typed = [];
 // Generated using ChatGPT
 const typingTexts = [
@@ -80,9 +81,11 @@ function start(){
         for(let c = 0;c<characterTree[w].length;c++){
             console.log(characterTree[w][c]);
             charLength++;
-            typewriterHTML += `<span id="typewriter-char-${charLength}">${characterTree[w][c]}</span>`;
+            if(characterTree[w][c] != " ") typewriterHTML += `<span id="typewriter-char-${charLength}">${characterTree[w][c]}</span>`;
+            if(characterTree[w][c] == " ") whitespace = true;
         }
         typewriterHTML += `</span>`
+        if(whitespace) typewriterHTML += `<span id="typewriter-char-${charLength}">${characterTree[w][c]}</span>`
     }
     typewriter.innerHTML=typewriterHTML;
     typewriter.children[0].classList.add("highlight-typing");
@@ -125,29 +128,31 @@ function get_typewriter_char(i){
 }
 function handleChar(e){
   if(!currentlyPlaying) return;
+  const current_typewriter_char = get_typewriter_char(char_index);
   const key_pressed = e.key;
   let pressedSpace;
   if(disallowedCodes.includes(key_pressed)) return;
   typer.value = ""; 
   if(key_pressed == "Backspace" || key_pressed == "Delete") {
-    typed.splice(index-1, 1);
-    if(index > 0) index--;
+    if(current_typewriter_char.innerText == " ") word_index--;
+    typed.splice(char_index-1, 1);
+    if(char_index > 0) char_index--;
   }else if(key_pressed == " "){
     console.log("== SPACE == ")
     pressedSpace = true;
-    index ++;
+    char_index++;
+    word_index++;
   }
     else{
     typed.push(key_pressed);
-    index++;
+    char_index++;
   };
-  const current_typewriter_char = get_typewriter_char(index);
   console.log("CURRENT CHAR SHOULD BE:", current_typewriter_char.innerText)
   if((current_typewriter_char.innerText == key_pressed) || (pressedSpace && !current_typewriter_char)){
     current_typewriter_char.classList.add("correct-char")
   }else{
     current_typewriter_char.classList.add("wrong-char")
   }
-  console.log("TYPED",typed, "INDEX", index)
+  console.log("TYPED",typed, "INDEX", char_index)
   
 }
