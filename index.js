@@ -134,11 +134,12 @@ function handleChar(e){
   if(disallowedCodes.includes(key_pressed)) return;
   typer.value = ""; 
   if(key_pressed == "Backspace" || key_pressed == "Delete") {
-    if(current_typewriter_char.innerText == " ") word_index--;
+    if(current_typewriter_char.innerText == " " && word_index > 0) word_index--;
     typed.splice(char_index-1, 1);
     if(char_index > 0) char_index--;
     current_typewriter_char.classList.remove("wrong-char")
     current_typewriter_char.classList.remove("correct-char")
+    return;
   }else if(key_pressed == " "){
     console.log("== SPACE == ")
     pressedSpace = true;
@@ -150,7 +151,7 @@ function handleChar(e){
     char_index++;
   };
   console.log("CURRENT CHAR SHOULD BE:", current_typewriter_char.innerText)
-  if((current_typewriter_char.innerText == key_pressed) || (pressedSpace && !current_typewriter_char) && key_pressed != "Backspace"){
+  if((current_typewriter_char.innerText == key_pressed) || (pressedSpace && !current_typewriter_char)){
     current_typewriter_char.classList.add("correct-char")
     current_typewriter_char.classList.remove("wrong-char")
   }else{
