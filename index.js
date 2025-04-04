@@ -150,8 +150,11 @@ function handleChar(e){
   console.log("CURRENT CHAR SHOULD BE:", current_typewriter_char.innerText)
   if((current_typewriter_char.innerText == key_pressed) || (pressedSpace && !current_typewriter_char)){
     current_typewriter_char.classList.add("correct-char")
+    current_typewriter_char.classList.remove("wrong-char")
   }else{
     current_typewriter_char.classList.add("wrong-char")
+    current_typewriter_char.classList.remove("correct-char")
+
   }
   console.log("TYPED",typed, "CHAR_INDEX:", char_index, " | WORD INDEX:", word_index)
   
