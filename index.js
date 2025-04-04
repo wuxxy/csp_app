@@ -35,7 +35,7 @@ const typingTexts = [
   ];
 // Generated using ChatGPT 
 const disallowedCodes = [
-  "ShiftLeft", "ShiftRight",
+  "ShiftLeft", "ShiftRight", "Shift",
   "ControlLeft", "ControlRight",
   "AltLeft", "AltRight",
   "MetaLeft", "MetaRight",  // Command key on Mac or Windows key on Windows
@@ -125,9 +125,9 @@ function loadText(){
 
 function handleChar(e){
   const key = e.key;
-  typer.textContent = "";
   if(disallowedCodes.includes(key)) return;
-  if((key == "Backspace" || key == "Delete") && index <=0) {
+  typer.textContent = "";
+  if((key == "Backspace" || key == "Delete") && index > 0) {
     typed[index]="";
     index--;
   }else{
