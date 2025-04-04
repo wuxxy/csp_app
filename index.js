@@ -139,6 +139,7 @@ function loadText(){
     }
     typewriter.innerHTML=typewriterHTML;
     typewriter.children[0].classList.add("highlight-typing");
+    document.getElementById(`typewriter-char-1`).classList.add("char_index")
     return {words, characterTree}
 
 }
