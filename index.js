@@ -129,7 +129,9 @@ function handleChar(e){
   if(key == "Backspace" && index !=0) {
     typed[index]="";
     index--;
+  }else{
+    typed += key;
+    console.log(typed);
   };
-  typed += key;
-  console.log(typed);
+  
 }
