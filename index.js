@@ -44,7 +44,6 @@ const disallowedCodes = [
   "Enter",
   "Escape",
   "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight",
-  "Backspace", "Delete",
   "Insert",
   "Home", "End",
   "PageUp", "PageDown",
@@ -125,11 +124,16 @@ function loadText(){
 function handleChar(e){
   const key = e.key;
   e.preventDefault();
-  if(disallowedCodes.includes(key)) return;
+  let allowedChar = true;
+  for (let i = 0; index < disallowedCodes.length; i++) {
+    const element = disallowedCodes[index];
+    if(element == key) return allowedChar = false;
+  }
+  if(!allowedChar) return;
   if(key == "Backspace" && index !=0) {
     typed[index]="";
     index--;
   };
-  typed += e.key;
+  typed += key;
   console.log(typed);
 }
