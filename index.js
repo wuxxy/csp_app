@@ -210,8 +210,8 @@ function handleChar(e){
   }
   console.log("LENGTH OF TYPE:", typed.length, "LAST LETTER TYPED:", typed[typed.length-1]);
   
-  stats_accuracy.innerText = (((typed.length-wrong_chars)/(typed.length))*100).toFixed(2) + "%"
-  stats_wpm.innerText = (typed.length/5)/60
+  stats_accuracy.innerText = (((typed.length-wrong_chars)/(typed.length))*100).toFixed(2) + "%";
+  stats_wpm.innerText = (((timeSelected-timer)*typed.length)/5)/60;
   console.log("TYPED",typed, "CHAR_INDEX:", char_index, " | WORD INDEX:", word_index)
   
 }
