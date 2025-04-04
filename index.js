@@ -216,5 +216,5 @@ function handleChar(e){
 function moveCharIndex(dist){
   document.getElementById(`typewriter-char-${char_index+1}`).classList.remove("char_index")
   char_index += dist;
-  document.getElementById(`typewriter-char-${char_index}`).classList.add("char_index")
+  document.getElementById(`typewriter-char-${char_index+1}`).classList.add("char_index")
 }
