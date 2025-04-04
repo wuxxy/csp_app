@@ -150,7 +150,7 @@ function handleChar(e){
     char_index++;
   };
   console.log("CURRENT CHAR SHOULD BE:", current_typewriter_char.innerText)
-  if((current_typewriter_char.innerText == key_pressed) || (pressedSpace && !current_typewriter_char)){
+  if((current_typewriter_char.innerText == key_pressed) || (pressedSpace && !current_typewriter_char) && key_pressed != "Backspace"){
     current_typewriter_char.classList.add("correct-char")
     current_typewriter_char.classList.remove("wrong-char")
   }else{
