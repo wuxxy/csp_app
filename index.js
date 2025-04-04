@@ -126,7 +126,7 @@ function loadText(){
 function handleChar(e){
   const key = e.key;
   if(disallowedCodes.includes(key)) return;
-  typer.innerHTML = ""; 
+  typer.value = ""; 
   if(key == "Backspace" || key == "Delete") {
     typed.splice(index, 1);
     if(index > 0) index--;
