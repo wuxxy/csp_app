@@ -90,23 +90,7 @@ function start(){
     
     currentlyPlaying = true;
     timer = timeSelected;
-    typewriter.innerHTML = "";
-    let typewriterHTML = "";
-    let charLength = 0;
-    for(let w = 0;w<characterTree.length;w++){
-        typewriterHTML += `<span id="typewriter-word-${w}">`;
-        let whitespace = false;
-        for(let c = 0;c<characterTree[w].length;c++){
-            console.log(characterTree[w][c]);
-            charLength++;
-            if(characterTree[w][c] != " ") typewriterHTML += `<span id="typewriter-char-${charLength}">${characterTree[w][c]}</span>`;
-            if(characterTree[w][c] == " ") whitespace = true;
-        }
-        typewriterHTML += `</span>`
-        if(whitespace) typewriterHTML += `<span id="typewriter-char-${charLength}"> </span>`
-    }
-    typewriter.innerHTML=typewriterHTML;
-    typewriter.children[0].classList.add("highlight-typing");
+    
     // Timer
     const interval = setInterval(() => {
         timer--;
@@ -138,6 +122,23 @@ function loadText(){
     });
     console.log(characterTree);
     tree = characterTree;
+    typewriter.innerHTML = "";
+    let typewriterHTML = "";
+    let charLength = 0;
+    for(let w = 0;w<characterTree.length;w++){
+        typewriterHTML += `<span id="typewriter-word-${w}">`;
+        let whitespace = false;
+        for(let c = 0;c<characterTree[w].length;c++){
+            console.log(characterTree[w][c]);
+            charLength++;
+            if(characterTree[w][c] != " ") typewriterHTML += `<span id="typewriter-char-${charLength}">${characterTree[w][c]}</span>`;
+            if(characterTree[w][c] == " ") whitespace = true;
+        }
+        typewriterHTML += `</span>`
+        if(whitespace) typewriterHTML += `<span id="typewriter-char-${charLength}"> </span>`
+    }
+    typewriter.innerHTML=typewriterHTML;
+    typewriter.children[0].classList.add("highlight-typing");
     return {words, characterTree}
 
 }
