@@ -163,7 +163,7 @@ function handleChar(e){
       typewriter.children[2*word_index].classList.add("highlight-typing")
     };
     typed.splice(char_index-1, 1);
-    if(char_index > 0) char_index--;
+    if(char_index > 0) moveCharIndex(-1);
     
     if(get_typewriter_next_char.classList.contains("wrong-char")){
       get_typewriter_next_char.classList.remove("wrong-char")
@@ -177,7 +177,7 @@ function handleChar(e){
   }else if(key_pressed == " "){
     console.log("== SPACE == ")
     pressedSpace = true;
-    char_index++;
+    moveCharIndex(1);
     if(get_typewriter_next_char == " "){
       typewriter.children[2*word_index].classList.remove("highlight-typing")
       word_index++;
@@ -190,7 +190,7 @@ function handleChar(e){
     // HANDLE REGULAR KEY PRESS
     // =============
     typed.push(key_pressed);
-    char_index++;
+    moveCharIndex(1);
   };
   console.log("CURRENT CHAR SHOULD BE:", current_typewriter_char.innerText)
   if((current_typewriter_char.innerText == key_pressed) || (pressedSpace && !current_typewriter_char)){
@@ -211,4 +211,9 @@ function handleChar(e){
   stats_accuracy.innerText = (((typed.length-wrong_chars)/(typed.length))*100).toFixed(2) + "%"
   console.log("TYPED",typed, "CHAR_INDEX:", char_index, " | WORD INDEX:", word_index)
   
+}
+function moveCharIndex(dist){
+  document.getElementById(`typewriter-char-${char_index}`).classList.remove("char_index")
+  char_index += dist;
+  document.getElementById(`typewriter-char-${char_index}`).classList.add("char_index")
 }

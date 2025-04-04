@@ -18,3 +18,6 @@ body {
     color: rgb(208, 82, 82);
     background-color: rgba(255, 0, 0, 0.095);
 }
+.char_index{
+    text-decoration: underline whitesmoke 2px;
+}
