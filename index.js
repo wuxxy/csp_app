@@ -85,7 +85,7 @@ function start(){
             if(characterTree[w][c] == " ") whitespace = true;
         }
         typewriterHTML += `</span>`
-        if(whitespace) typewriterHTML += `<span id="typewriter-char-${charLength}">${characterTree[w][c]}</span>`
+        if(whitespace) typewriterHTML += `<span id="typewriter-char-${charLength}"> </span>`
     }
     typewriter.innerHTML=typewriterHTML;
     typewriter.children[0].classList.add("highlight-typing");
