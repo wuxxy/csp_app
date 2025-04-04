@@ -134,6 +134,8 @@ function handleChar(e){
   if(disallowedCodes.includes(key_pressed)) return;
   typer.value = ""; 
   if(key_pressed == "Backspace" || key_pressed == "Delete") {
+    console.log(get_typewriter_char(char_index));
+    
     if(get_typewriter_char(char_index-1).innerText == " " && word_index > 0) {
       typewriter.children[2*word_index].classList.remove("highlight-typing")
       word_index--;
