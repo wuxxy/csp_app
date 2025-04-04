@@ -6,6 +6,7 @@ let currentlyPlaying = false;
 let timer;
 let tree;
 let index = 0;
+let typed = "";
 // Generated using ChatGPT
 const typingTexts = [
     `It was the best of times, it was the worst of times, it was the age of wisdom, it was the age of foolishness. It was the epoch of belief, it was the epoch of incredulity. We had everything before us, we had nothing before us.
@@ -32,7 +33,27 @@ const typingTexts = [
   
   Whenever I find myself growing grim about the mouth, whenever it is a damp, drizzly November in my soul, then I account it high time to get to sea as soon as I can.`  
   ];
-  
+// Generated using ChatGPT 
+const disallowedCodes = [
+  "ShiftLeft", "ShiftRight",
+  "ControlLeft", "ControlRight",
+  "AltLeft", "AltRight",
+  "MetaLeft", "MetaRight",  // Command key on Mac or Windows key on Windows
+  "CapsLock",
+  "Tab",
+  "Enter",
+  "Escape",
+  "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight",
+  "Backspace", "Delete",
+  "Insert",
+  "Home", "End",
+  "PageUp", "PageDown",
+  "ContextMenu",
+  "Pause",
+  "NumLock", "ScrollLock",
+  "PrintScreen"
+];
+
 // Document Elements
 const timer_label = document.getElementById("timer-label");
 const timer_bar = document.getElementById("timer-bar");
@@ -50,7 +71,6 @@ function start(){
     timer = timeSelected;
     typewriter.innerHTML = "";
     const {words, characterTree} = loadText();
-    const wordAmount = words.length;
     let typewriterHTML = "";
     let charLength = 0;
     for(let w = 0;w<characterTree.length;w++){
@@ -103,7 +123,13 @@ function loadText(){
 }
 
 function handleChar(e){
-    e.preventDefault();
-    console.log(e.key);
-    
+  const key = e.key;
+  e.preventDefault();
+  if(disallowedCodes.includes(key)) return;
+  if(key == "Backspace" && index !=0) {
+    typed[index]="";
+    index--;
+  };
+  typed += e.key;
+  console.log(typed);
 }
