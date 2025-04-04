@@ -137,6 +137,8 @@ function handleChar(e){
     if(current_typewriter_char.innerText == " ") word_index--;
     typed.splice(char_index-1, 1);
     if(char_index > 0) char_index--;
+    current_typewriter_char.classList.remove("wrong-char")
+    current_typewriter_char.classList.remove("correct-char")
   }else if(key_pressed == " "){
     console.log("== SPACE == ")
     pressedSpace = true;
