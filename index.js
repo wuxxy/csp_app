@@ -151,6 +151,7 @@ function handleChar(e){
   const key_pressed = e.key;
   let pressedSpace;
   if(disallowedCodes.includes(key_pressed)) return;
+  let get_typewriter_next_char = get_typewriter_char(char_index+1);
   typer.value = ""; 
   // =============
   // HANDLE DELETE
@@ -163,7 +164,7 @@ function handleChar(e){
     };
     typed.splice(char_index-1, 1);
     if(char_index > 0) char_index--;
-    let get_typewriter_next_char = get_typewriter_char(char_index+1);
+    
     if(get_typewriter_next_char.classList.contains("wrong-char")){
       get_typewriter_next_char.classList.remove("wrong-char")
       wrong_chars--;
@@ -177,9 +178,12 @@ function handleChar(e){
     console.log("== SPACE == ")
     pressedSpace = true;
     char_index++;
-    typewriter.children[2*word_index].classList.remove("highlight-typing")
-    word_index++;
-    typewriter.children[2*word_index].classList.add("highlight-typing")
+    if(get_typewriter_next_char == " "){
+      typewriter.children[2*word_index].classList.remove("highlight-typing")
+      word_index++;
+      typewriter.children[2*word_index].classList.add("highlight-typing")
+    }
+    
   }
     else{
     // =============
