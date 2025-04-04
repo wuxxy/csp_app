@@ -138,7 +138,8 @@ function handleChar(e){
     index++;
   };
   const current_typewriter_char = get_typewriter_char(index);
-  if(current_typewriter_char.textContent == key_pressed){
+  console.log("CURRENT CHAR SHOULD BE:", current_typewriter_char.innerText)
+  if(current_typewriter_char.innerText == key_pressed){
     current_typewriter_char.classList.add("correct-char")
   }else{
     current_typewriter_char.classList.add("wrong-char")
