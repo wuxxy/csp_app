@@ -128,9 +128,9 @@ function handleChar(e){
   console.log("TYPED",typed, "INDEX", index)
   if(disallowedCodes.includes(key)) return;
   typer.innerHTML = "";
-  if((key == "Backspace" || key == "Delete") && index > 0) {
+  if(key == "Backspace" || key == "Delete") {
     typed[index]="";
-    index--;
+    if(index > 0) index--;
   }else{
     typed += key;
     index++;
