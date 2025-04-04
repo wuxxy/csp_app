@@ -144,9 +144,9 @@ function handleChar(e){
     console.log("== SPACE == ")
     pressedSpace = true;
     char_index++;
-    typewriter.children[word_index].classList.remove("highlight-typing")
+    typewriter.children[2*word_index].classList.remove("highlight-typing")
     word_index++;
-    typewriter.children[word_index].classList.add("highlight-typing")
+    typewriter.children[2*word_index].classList.add("highlight-typing")
   }
     else{
     typed.push(key_pressed);
