@@ -102,7 +102,8 @@ function start(){
           timer_bar.style.width = "0%";
           return;
         }
-  
+        stats_wpm.innerText = (((timeSelected-timer)*typed.length)/5)/60;
+        
         // Update label and fill width
         timer_label.textContent = `${timer}s left`;
         const progress = (timer / timeSelected) * 100;
@@ -211,7 +212,6 @@ function handleChar(e){
   console.log("LENGTH OF TYPE:", typed.length, "LAST LETTER TYPED:", typed[typed.length-1]);
   
   stats_accuracy.innerText = (((typed.length-wrong_chars)/(typed.length))*100).toFixed(2) + "%";
-  stats_wpm.innerText = (((timeSelected-timer)*typed.length)/5)/60;
   console.log("TYPED",typed, "CHAR_INDEX:", char_index, " | WORD INDEX:", word_index)
   
 }
