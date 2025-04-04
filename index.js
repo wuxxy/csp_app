@@ -153,6 +153,6 @@ function handleChar(e){
   }else{
     current_typewriter_char.classList.add("wrong-char")
   }
-  console.log("TYPED",typed, "INDEX", char_index)
+  console.log("TYPED",typed, "CHAR_INDEX:", char_index, " | WORD INDEX:", word_index)
   
 }
