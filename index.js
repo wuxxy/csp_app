@@ -128,18 +128,24 @@ function get_typewriter_char(i){
 function handleChar(e){
   if(!currentlyPlaying) return;
   const key_pressed = e.key;
+  let pressedSpace;
   if(disallowedCodes.includes(key_pressed)) return;
   typer.value = ""; 
   if(key_pressed == "Backspace" || key_pressed == "Delete") {
     typed.splice(index-1, 1);
     if(index > 0) index--;
-  }else{
+  }else if(key_pressed == " "){
+    console.log("== SPACE == ")
+    pressedSpace = true;
+    index += 2;
+  }
+    else{
     typed.push(key_pressed);
     index++;
   };
   const current_typewriter_char = get_typewriter_char(index);
   console.log("CURRENT CHAR SHOULD BE:", current_typewriter_char.innerText)
-  if(current_typewriter_char.innerText == key_pressed){
+  if((current_typewriter_char.innerText == key_pressed) || (pressedSpace && !current_typewriter_char)){
     current_typewriter_char.classList.add("correct-char")
   }else{
     current_typewriter_char.classList.add("wrong-char")
