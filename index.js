@@ -80,11 +80,9 @@ function start(){
         for(let c = 0;c<characterTree[w].length;c++){
             console.log(characterTree[w][c]);
             charLength++;
-            if(characterTree[w][c] != " ") typewriterHTML += `<span id="typewriter-char-${charLength}">${characterTree[w][c]}</span>`;;
-            if(characterTree[w][c] == " ") whitespace = true;
+            typewriterHTML += `<span id="typewriter-char-${charLength}">${characterTree[w][c]}</span>`;
         }
         typewriterHTML += `</span>`
-        if(whitespace) typewriterHTML += " "
     }
     typewriter.innerHTML=typewriterHTML;
     typewriter.children[0].classList.add("highlight-typing");
@@ -137,7 +135,7 @@ function handleChar(e){
   }else if(key_pressed == " "){
     console.log("== SPACE == ")
     pressedSpace = true;
-    index += 2;
+    index ++;
   }
     else{
     typed.push(key_pressed);
