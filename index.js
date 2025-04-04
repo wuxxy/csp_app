@@ -58,9 +58,10 @@ const disallowedCodes = [
 const timer_label = document.getElementById("timer-label");
 const timer_bar = document.getElementById("timer-bar");
 const typewriter = document.getElementById("typewriter");
+const typer = document.getElementById("typer")
 // Event Listeners
 document.getElementById("start").addEventListener("click", start);
-document.getElementById("typer").addEventListener("keydown", handleChar);
+typer.addEventListener("keydown", handleChar);
 
 
 // Functions
@@ -124,14 +125,16 @@ function loadText(){
 
 function handleChar(e){
   const key = e.key;
-  e.preventDefault();
+  typer.textContent = "";
   if(disallowedCodes.includes(key)) return;
   if(key == "Backspace" && index !=0) {
     typed[index]="";
     index--;
   }else{
     typed += key;
+    index++;
     console.log(typed);
+    
   };
   
 }
