@@ -16,42 +16,51 @@
             <h3 class="text-3xl">Test your Typing Skills!</h3>
         </div>
         <div class="w-full max-w-3xl bg-pink-950 border-[1px] border-pink-600 text-gray-200 shadow-xl p-8 space-y-6">
-            <div class="flex justify-center items-center space-x-4 w-full max-w-xl">
-                <!-- Timer Container -->
-                <div class="relative w-full h-10 bg-red-800 bg-opacity-50 rounded-md overflow-hidden shadow-inner">
-                  <!-- Timer Fill (to be controlled by JS) -->
-                  <span id="timer-bar" class="absolute left-0 top-0 h-full bg-red-600 transition-all duration-1000 ease-linear" style="width: 100%;"></span>
-              
-                  <!-- Seconds Text -->
-                  <div class="absolute inset-0 flex items-center justify-center z-10">
-                    <span id="timer-label" class="text-white font-semibold text-sm tracking-wide">30s left</span>
-                  </div>
-                </div>
-              
-                <!-- Time Selector -->
-                <div class="flex flex-col justify-between h-28 w-12 bg-gray-100 rounded-lg shadow-md overflow-hidden border border-gray-200">
-                  <button class="flex-1 flex items-center justify-center text-xs text-gray-700 hover:bg-gray-200 transition">15</button>
-                  <button class="flex-1 flex items-center justify-center text-xs font-bold time-selected text-white">30</button>
-                  <button class="flex-1 flex items-center justify-center text-xs text-gray-700 hover:bg-gray-200 transition">60</button>
-                </div>
-              </div>
-              
-              
-            <!-- Stats Panel -->
-            <div class="grid grid-cols-3 gap-4 text-center">
-                <div class="bg-gray-900 rounded-xl p-4 shadow-sm">
-                    <p class="text-sm text-gray-500">WPM</p>
-                    <p id="stats-wpm" class="text-2xl font-semibold text-gray-300">N/A</p>
-                </div>
-                <div class="bg-gray-900 rounded-xl p-4 shadow-sm">
-                    <p class="text-sm text-gray-500">Accuracy</p>
-                    <p id="stats-accuracy" class="text-2xl font-semibold text-gray-300">N/A</p>
-                </div>
-                <div class="bg-gray-900 rounded-xl p-4 shadow-sm">
-                    <p class="text-sm text-gray-500">Time</p>
-                    <p id="stats-time" class="text-2xl font-semibold text-gray-300">N/A</p>
-                </div>
-            </div>
+            <!-- Timer + Time Selector -->
+<div class="flex justify-center items-center gap-6 w-full max-w-xl">
+
+    <!-- Timer Bar Container -->
+    <div class="relative w-full h-10 bg-pink-900/60 rounded-2xl overflow-hidden shadow-inner border border-pink-800">
+      <!-- Dynamic Timer Fill -->
+      <span
+        id="timer-bar"
+        class="absolute left-0 top-0 h-full bg-pink-600 transition-all duration-1000 ease-linear"
+        style="width: 100%;"
+      ></span>
+  
+      <!-- Timer Label -->
+      <div class="absolute inset-0 flex items-center justify-center z-10">
+        <span
+          id="timer-label"
+          class="text-gray-200 font-semibold text-sm tracking-wider"
+        >30s left</span>
+      </div>
+    </div>
+  
+    <!-- Time Selector -->
+    <div class="flex flex-col justify-between h-28 w-12 bg-pink-800 rounded-xl shadow-md border border-pink-700 overflow-hidden">
+      <button class="flex-1 flex items-center justify-center text-xs text-gray-300 hover:bg-pink-700 transition">15</button>
+      <button class="flex-1 flex items-center justify-center text-xs font-bold time-selected bg-pink-600 text-white transition">30</button>
+      <button class="flex-1 flex items-center justify-center text-xs text-gray-300 hover:bg-pink-700 transition">60</button>
+    </div>
+  </div>
+  
+  <!-- Stats Panel -->
+  <div class="grid grid-cols-3 gap-4 text-center mt-6">
+    <div class="bg-pink-900 rounded-2xl p-4 shadow-md border border-pink-700">
+      <p class="text-sm text-gray-400">WPM</p>
+      <p id="stats-wpm" class="text-2xl font-semibold text-gray-100">N/A</p>
+    </div>
+    <div class="bg-pink-900 rounded-2xl p-4 shadow-md border border-pink-700">
+      <p class="text-sm text-gray-400">Accuracy</p>
+      <p id="stats-accuracy" class="text-2xl font-semibold text-gray-100">N/A</p>
+    </div>
+    <div class="bg-pink-900 rounded-2xl p-4 shadow-md border border-pink-700">
+      <p class="text-sm text-gray-400">Time</p>
+      <p id="stats-time" class="text-2xl font-semibold text-gray-100">N/A</p>
+    </div>
+  </div>
+  
 
             <!-- Typing Prompt -->
             <div class="bg-gray-900 rounded-xl p-6 h-48 overflow-y-auto font-mono text-lg text-gray-700 shadow-inner">
