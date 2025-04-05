@@ -11,13 +11,48 @@ body {
     padding: 2px;
 }
 .correct-char{
-    color: rgb(82, 208, 82);
-    background-color: rgba(226, 226, 226, 0.095);
+    color: rgb(156, 41, 210);
+    background-color: rgba(164, 73, 153, 0.16);
 }
 .wrong-char{
     color: rgb(208, 82, 82);
-    background-color: rgba(255, 0, 0, 0.095);
+    background-color: rgba(255, 0, 0, 0.151);
 }
-.char_index{
-    text-decoration: underline whitesmoke 2px;
+
+.cursor {
+  position: absolute;
+  width: 2px;
+  height: 1em;
+  background-color: #ff69b4 ;
+  animation: blink 1s step-end infinite;
+  pointer-events: none;
+  transition: top 0.05s ease, left 0.05s ease;
+}
+#typewriter {
+  position: relative;
+  user-select: none;       /* Prevent text selection */
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  caret-color: transparent; /* Hide real text cursor */
+  overflow: hidden; /* Ensures absolutely positioned children don't overflow */
+}
+
+.start-hint {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.5rem 0;
+  text-align: center;
+  font-size: 0.75rem;
+  color: #eee;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.8;
+  transition: opacity .3s ease;
+}
+
+.start-hint.hiddenn {
+  opacity: 0;
 }

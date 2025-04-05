@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Protest+Strike&family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <main class="bg-gradient-to-b from-blue-800 to-pink-900 text-gray-100 flex flex-col items-center justify-center h-screen gap-2">
+    <main class="bg-gradient-to-b from-fuchsia-950 to-pink-900 text-gray-100 flex flex-col items-center justify-center h-screen gap-2">
         <div class="my-2">
             <h3 class="text-3xl">Test your Typing Skills!</h3>
         </div>
@@ -53,19 +53,19 @@
                     <div class="flex flex-col items-center justify-center">
                       <div class="flex flex-col rounded-lg overflow-hidden border border-pink-800 bg-pink-900 shadow-sm">
                         <button
-                          onclick="setTime(30)"
+                          onclick="setTime(15)"
                           class="px-4 py-2 text-sm font-medium text-gray-200 hover:bg-pink-700 transition rounded-t-lg"
                         >
                           30s
                         </button>
                         <button
-                          onclick="setTime(45)"
+                          onclick="setTime(30)"
                           class="px-4 py-2 text-sm font-medium text-gray-200 hover:bg-pink-700 transition border-t border-pink-800"
                         >
                           45s
                         </button>
                         <button
-                          onclick="setTime(60)"
+                          onclick="setTime(45)"
                           class="px-4 py-2 text-sm font-medium text-gray-200 hover:bg-pink-700 transition border-t border-pink-800 rounded-b-lg"
                         >
                           60s
@@ -95,19 +95,11 @@
   
 
             <!-- Typing Prompt -->
-            <div class="bg-gray-900 rounded-xl p-6 h-48 overflow-y-auto font-mono text-lg text-gray-700 shadow-inner">
-            <p id="typewriter">
+            <div  class="bg-gray-950 pointer-events-none rounded-xl p-6 overflow-x-hidden font-mono text-xl text-stone-700 shadow-inner ring-1 ring-pink-900 ring-outset">
+              <p aria-readonly="true" id="typewriter" class="h-full pointer-events-none relative">
                 The quick brown fox jumps over the lazy dog. Practice your typing here and improve your skills every day.
-            </p>
+              </p>
             </div>
-
-            <!-- Typing Input -->
-            <input
-            type="text"
-            id="typer"
-            placeholder="Start typing here..."
-            class="w-full mt-4 p-4 text-lg rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono shadow-sm"
-            />
 
             <!-- Restart Button -->
             <div class="flex justify-center">
@@ -120,6 +112,11 @@
             </div>
             
         </div>
+        <footer class="text-center text-md text-gray-500 pb-4 text-pink-500 font-thin">
+          <p>Made by Jarif</p>
+          <p>Read the code at <a href="https://github.com/wuxxy/csp_app" class="text-pink-500 hover:underline">GitHub</a></p>
+        </footer>
+
     </main>
     <script src="index.js"></script>
 </body>
