@@ -99,8 +99,10 @@ function start(){
   
         if (timer <= 0) {
           clearInterval(interval);
+          currentlyPlaying = false;
           timer_label.textContent = "0s left";
           timer_bar.style.width = "0%";
+          gameOver()
           return;
         }
         const time_elapsed = (timeSelected-timer);
@@ -227,4 +229,7 @@ function moveCharIndex(dist){
 function calculateWPM(chars, time){
   // Multiply by 60 seconds (minute) divide by time elapsed. Every word is consider 5 letters as standard.
   return ((60*chars)/5)/time
+}
+function gameOver(){
+  
 }
