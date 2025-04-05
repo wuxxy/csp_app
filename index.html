@@ -37,17 +37,25 @@
                   </div>
               
                   <!-- Time Selector -->
-                  <div class="flex flex-col justify-between h-28 w-12 bg-pink-800 rounded-xl shadow-md border border-pink-700 overflow-hidden">
-                    <button class="flex-1 flex items-center justify-center text-xs text-gray-300 hover:bg-pink-700 transition">15</button>
-                    <button class="flex-1 flex items-center justify-center text-xs font-bold time-selected bg-pink-600 text-white transition">30</button>
-                    <button class="flex-1 flex items-center justify-center text-xs text-gray-300 hover:bg-pink-700 transition">60</button>
+                  <div class="inline-flex rounded-md shadow-sm" role="group">
+                    <button onclick="setTime(30)" class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-l-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700">
+                      30s
+                    </button>
+                    <button onclick="setTime(45)" class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700">
+                      45s
+                    </button>
+                    <button onclick="setTime(60)" class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-r-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700">
+                      60s
+                    </button>
                   </div>
+                  
                     <!-- Difficulty Selector -->
                     <div class="flex justify-center gap-4 mt-2">
                         <button class="px-4 py-2 rounded-full text-sm font-medium text-gray-300 bg-pink-800 hover:bg-pink-700 transition">Easy</button>
                         <button class="px-4 py-2 rounded-full text-sm font-semibold text-white bg-pink-600 shadow-md ring-2 ring-pink-500">Medium</button>
                         <button class="px-4 py-2 rounded-full text-sm font-medium text-gray-300 bg-pink-800 hover:bg-pink-700 transition">Hard</button>
                     </div>
+  
 
                 </div>
                   
