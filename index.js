@@ -102,7 +102,8 @@ function start(){
           timer_bar.style.width = "0%";
           return;
         }
-        stats_wpm.innerText = (((timeSelected-timer)*typed.length)/5)/60;
+        const time_elapsed = (timeSelected-timer);
+        stats_wpm.innerText = ((60*typed.length)/5)/time_elapsed;
         
         // Update label and fill width
         timer_label.textContent = `${timer}s left`;
