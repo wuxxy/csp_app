@@ -25,57 +25,53 @@
                   
                       <!-- Timer Bar -->
                       <div class="relative h-10 bg-pink-900/60 rounded-xl overflow-hidden shadow-inner border border-pink-800">
-                        <!-- Fill Bar -->
                         <span
                           id="timer-bar"
                           class="absolute left-0 top-0 h-full bg-pink-600 transition-all duration-1000 ease-linear"
                           style="width: 100%;"
                         ></span>
-                  
-                        <!-- Time Label -->
                         <div class="absolute inset-0 flex items-center justify-center z-10">
                           <span id="timer-label" class="text-sm font-medium text-gray-200 tracking-wider">30s left</span>
                         </div>
                       </div>
                   
-                      <!-- Difficulty Selector -->
-                      <div class="flex justify-center gap-4">
-                        <button class="px-4 py-2 rounded-full text-sm font-medium text-gray-300 bg-pink-800 hover:bg-pink-700 transition">
+                      <!-- Difficulty Selector (horizontal, connected) -->
+                      <div class="inline-flex rounded-lg overflow-hidden border border-pink-800 bg-pink-900 shadow-sm">
+                        <button class="px-4 py-2 text-sm font-medium text-gray-200 bg-pink-800 hover:bg-pink-700 transition rounded-l-lg">
                           Easy
                         </button>
-                        <button class="px-4 py-2 rounded-full text-sm font-semibold text-white bg-pink-600 shadow-md ring-2 ring-pink-500">
+                        <button class="px-4 py-2 text-sm font-semibold text-white bg-pink-600 hover:bg-pink-500 transition">
                           Medium
                         </button>
-                        <button class="px-4 py-2 rounded-full text-sm font-medium text-gray-300 bg-pink-800 hover:bg-pink-700 transition">
+                        <button class="px-4 py-2 text-sm font-medium text-gray-200 bg-pink-800 hover:bg-pink-700 transition rounded-r-lg">
                           Hard
                         </button>
                       </div>
                     </div>
                   
-                    <!-- Right Column: Time Selector Buttons -->
-                    <div class="flex flex-col justify-center">
-                      <div class="inline-flex rounded-md shadow-sm overflow-hidden border border-pink-800 bg-pink-900" role="group">
+                    <!-- Right Column: Time Selector (vertical, connected) -->
+                    <div class="flex flex-col items-center justify-center">
+                      <div class="flex flex-col rounded-lg overflow-hidden border border-pink-800 bg-pink-900 shadow-sm">
                         <button
                           onclick="setTime(30)"
-                          class="px-4 py-2 text-sm font-medium text-gray-200 hover:bg-pink-700 transition"
+                          class="px-4 py-2 text-sm font-medium text-gray-200 hover:bg-pink-700 transition rounded-t-lg"
                         >
                           30s
                         </button>
                         <button
                           onclick="setTime(45)"
-                          class="px-4 py-2 text-sm font-medium text-gray-200 border-l border-pink-800 hover:bg-pink-700 transition"
+                          class="px-4 py-2 text-sm font-medium text-gray-200 hover:bg-pink-700 transition border-t border-pink-800"
                         >
                           45s
                         </button>
                         <button
                           onclick="setTime(60)"
-                          class="px-4 py-2 text-sm font-medium text-gray-200 border-l border-pink-800 hover:bg-pink-700 transition"
+                          class="px-4 py-2 text-sm font-medium text-gray-200 hover:bg-pink-700 transition border-t border-pink-800 rounded-b-lg"
                         >
                           60s
                         </button>
                       </div>
                     </div>
-                  
                   </div>
                   
                 <!-- Stats Section -->
