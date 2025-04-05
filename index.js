@@ -105,7 +105,7 @@ function start(){
         }
         const time_elapsed = (timeSelected-timer);
         stats_wpm.innerText = Math.round(calculateWPM(typed.length, time_elapsed));
-        stats_time = time_elapsed + "seconds";
+        stats_time.innerText = time_elapsed + "seconds";
         // Update label and fill width
         timer_label.textContent = `${timer}s left`;
         const progress = (timer / timeSelected) * 100;
