@@ -65,7 +65,7 @@ const typer = document.getElementById("typer")
 
 const stats_accuracy = document.getElementById("stats-accuracy");
 const stats_wpm = document.getElementById("stats-wpm");
-const stats_wpm = document.getElementById("stats-time");
+const stats_time = document.getElementById("stats-time");
 let {words, characterTree} = loadText();
 
 // Event Listeners
