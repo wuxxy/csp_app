@@ -182,7 +182,6 @@ function handleChar(e){
   }else if(key_pressed == " "){
     console.log("== SPACE == ")
     pressedSpace = true;
-    moveCharIndex(1);
     if(get_typewriter_next_char == " "){
       console.log("MOVE WORD INDEX");
       
@@ -190,6 +189,7 @@ function handleChar(e){
       word_index++;
       typewriter.children[2*word_index].classList.add("highlight-typing")
     }
+    moveCharIndex(1);
     
   }
     else{
