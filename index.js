@@ -65,6 +65,7 @@ const typer = document.getElementById("typer")
 
 const stats_accuracy = document.getElementById("stats-accuracy");
 const stats_wpm = document.getElementById("stats-wpm");
+const stats_wpm = document.getElementById("stats-time");
 let {words, characterTree} = loadText();
 
 // Event Listeners
@@ -103,8 +104,8 @@ function start(){
           return;
         }
         const time_elapsed = (timeSelected-timer);
-        stats_wpm.innerText = ((60*typed.length)/5)/time_elapsed;
-        
+        stats_wpm.innerText = Math.round(calculateWPM(typed.length, time_elapsed));
+        stats_time = time_elapsed + "seconds";
         // Update label and fill width
         timer_label.textContent = `${timer}s left`;
         const progress = (timer / timeSelected) * 100;
@@ -220,4 +221,8 @@ function moveCharIndex(dist){
   document.getElementById(`typewriter-char-${char_index+1}`).classList.remove("char_index")
   char_index += dist;
   document.getElementById(`typewriter-char-${char_index+1}`).classList.add("char_index")
+}
+function calculateWPM(chars, time){
+  // Multiply by 60 seconds (minute) divide by time elapsed. Every word is consider 5 letters as standard.
+  return ((60*chars)/5)/time
 }
