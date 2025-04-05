@@ -184,6 +184,8 @@ function handleChar(e){
     pressedSpace = true;
     moveCharIndex(1);
     if(get_typewriter_next_char == " "){
+      console.log("MOVE WORD INDEX");
+      
       typewriter.children[2*word_index].classList.remove("highlight-typing")
       word_index++;
       typewriter.children[2*word_index].classList.add("highlight-typing")
