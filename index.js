@@ -1,18 +1,26 @@
 // @ts-nocheck
 // Variables
-let timeSelected = 5;
-let attempts = [];
 
+// Game Settings
+let timeSelected = 5;
+let difficulty = 1;
+
+// Game Storage
 let currentlyPlaying = 0;
 let timer;
 let tree;
 let char_index = 0;
 let word_index = 0;
-let typed = [];
+let typeCount = 0;
 let incorrectly_typed = [];
 let wrong_chars = 0;
+let attempts = [];
+let forceStop = false;
+let interval = null;
 
-const DEBUG_MODE = true;
+
+// For debug purposes
+const DEBUG_MODE = false;
 function debugLog(...args) {
   if (DEBUG_MODE) {
     console.debug("[DEBUG]", ...args);
@@ -46,6 +54,8 @@ const typingTexts = [
   Whenever I find myself growing grim about the mouth, whenever it is a damp, drizzly November in my soul, then I account it high time to get to sea as soon as I can.`,
 ];
 // Generated using ChatGPT
+// List of keys that are ignored during the game because of conflicts
+
 const disallowedCodes = [
   "ShiftLeft",
   "ShiftRight",
@@ -79,7 +89,7 @@ const disallowedCodes = [
   "Meta",
 ];
 
-// Document Elements
+// Document Elements to reference
 const timer_label = document.getElementById("timer-label");
 const timer_bar = document.getElementById("timer-bar");
 const typewriter = document.getElementById("typewriter");
@@ -87,36 +97,125 @@ const typewriter = document.getElementById("typewriter");
 const stats_accuracy = document.getElementById("stats-accuracy");
 const stats_wpm = document.getElementById("stats-wpm");
 const stats_time = document.getElementById("stats-time");
+
+// Reference for hint element.
+let hint;
+
+// Initialize default values
 let { words, characterTree } = loadText();
 
-// Event Listeners
-document.addEventListener("keydown", start);
+// Default settings
+setTime(30);
+setDiff(1);
+
+// Updates all screen UI elements to have updated values
+function updateScreen(){
+  let timeSelectors = []
+  let diffSelectors = []
+  debugLog(document.getElementById("time_selector").children)
+  Array.from(document.getElementById("time_selector").children).forEach(selector_button => {
+    selector_button.classList.remove("bg-pink-700")
+    timeSelectors.push(selector_button)
+  })
+  Array.from(document.getElementById("difficulty_selector").children).forEach(selector_button => {
+    selector_button.classList.remove("bg-pink-700")
+    diffSelectors.push(selector_button)
+  })
+  switch(timeSelected){
+    case 15:
+      timeSelectors[0].classList.add("bg-pink-700")
+      break;
+    case 30:
+      timeSelectors[1].classList.add("bg-pink-700")
+      break;
+    case 45:
+      timeSelectors[2].classList.add("bg-pink-700")
+      break;
+  }
+  switch(difficulty){
+    case 0:
+      diffSelectors[0].classList.add("bg-pink-700")
+      break;
+    case 1:
+      diffSelectors[1].classList.add("bg-pink-700")
+      break;
+    case 2:
+      diffSelectors[2].classList.add("bg-pink-700")
+      break;
+  }
+}
+// Sets the time for the test to take
+function setTime(time){
+  debugLog("RUNNING FUNCTION setTime")
+  timeSelected = time;
+  if(currentlyPlaying != 0){
+    forceStop=true; 
+    debugLog("CALLING RESTART - SETTIME")
+    restart();
+  }
+
+  updateScreen();
+}
+// Sets the test difficulty (difficulty not implement in game yet)
+function setDiff(diff){
+  difficulty = diff;
+  if(currentlyPlaying != 0){
+    forceStop=true; 
+    debugLog("CALLING RESTART - DIFF")
+    restart();
+  }
+  updateScreen();
+}
+
+// Event Listener for key presses
 document.addEventListener("keydown", handleChar);
 
+// Restarts the game, sets all variables into default starting value.
 function restart() {
+  typewriter.focus();
+  debugLog("RUNNING FUNCTION RESTART", document.activeElement)
+  document.activeElement.blur();
+  document.body.focus();
   currentlyPlaying = 0;
-  timer = 0;
+  timer = timeSelected;
   tree = null;
   char_index = 0;
   word_index = 0;
-  typed = [];
+  typeCount = 0;
   wrong_chars = 0;
   const reloadText = loadText();
   words = reloadText.words;
   characterTree = reloadText.characterTree;
+  stats_accuracy.innerText = "N/A";
+  stats_wpm.innerText = "N/A";
+  stats_time.innerText = "N/A";
+  timer_label.textContent = `${timeSelected}s left`;
+  timer_bar.style.width = `100%`;
 }
-
-function start({ key: key_pressed }) {
-  if (disallowedCodes.includes(key_pressed)) return;
+// Starts the game
+function start() {
+  debugLog("RUNNING FUNCTION START")
   if (currentlyPlaying) return;
-  document.getElementById("start-hint")?.classList.add("hiddenn");
-
+  if(hint) hint.classList.add("hiddenn");
   currentlyPlaying = 1;
   timer = timeSelected;
+  if(interval) return;
+  interval = setInterval(() => {
+    if(forceStop){
+      clearInterval(interval)
+      interval = null;
+      forceStop=false;
+      gameOver();
+      return;
+    }
+    
+    const time_elapsed = timeSelected - timer;
+    stats_wpm.innerText = Math.round(calculateWPM(typeCount, time_elapsed));
+    stats_time.innerText = time_elapsed + " seconds";
 
-  const interval = setInterval(() => {
-    timer--;
-
+    timer_label.textContent = `${timer}s left`;
+    const progress = (timer / timeSelected) * 100;
+    timer_bar.style.width = `${progress}%`;
     if (timer <= 0) {
       clearInterval(interval);
       timer_label.textContent = "0s left";
@@ -125,18 +224,13 @@ function start({ key: key_pressed }) {
       return;
     }
 
-    const time_elapsed = timeSelected - timer;
-    stats_wpm.innerText = Math.round(calculateWPM(typed.length, time_elapsed));
-    stats_time.innerText = time_elapsed + "seconds";
-
-    timer_label.textContent = `${timer}s left`;
-    const progress = (timer / timeSelected) * 100;
-    timer_bar.style.width = `${progress}%`;
+    timer--;
   }, 1000);
 }
-
+// Loads a random piece of text for the game to use
 function loadText() {
-  document.getElementById("start-hint")?.classList.remove("hiddenn");
+  debugLog("RUNNING FUNCTION loadText()")
+  if(hint) hint.classList.remove("hiddenn");
   const pickedText =
     typingTexts[Math.floor(Math.random() * typingTexts.length)];
 
@@ -146,7 +240,6 @@ function loadText() {
     characterTree.push([...word.split(""), " "]);
   });
 
-  debugLog("Character Tree:", characterTree);
   tree = characterTree;
   typewriter.innerHTML = "";
   let typewriterHTML = "";
@@ -156,7 +249,6 @@ function loadText() {
     typewriterHTML += `<span id="typewriter-word-${w}">`;
     let whitespace = false;
     for (let c = 0; c < characterTree[w].length; c++) {
-      debugLog("Char:", characterTree[w][c]);
       charLength++;
       if (characterTree[w][c] === " ") {
         whitespace = true;
@@ -171,35 +263,50 @@ function loadText() {
   }
   typewriterHTML += `<div id="cursor" class="cursor"></div>`;
   typewriterHTML += `<div id="start-hint" class="start-hint">Start typing to begin</div>`;
+
   typewriter.innerHTML = typewriterHTML;
+  hint = document.getElementById("start-hint");
   document.getElementById(`typewriter-char-1`).classList.add("char_index");
   updateCursorPosition();
 
   return { words, characterTree };
 }
-
+// Gets the character for given index
+// Parameter {i} - is a number and represents the requested index
 function get_typewriter_char(i) {
+  debugLog("RUNNING FUNCTION get_typewriter_char")
   return document.getElementById(`typewriter-char-${i}`);
 }
-
+// Handles what to do when a user presses a key
 function handleChar(e) {
-  if (currentlyPlaying != 1) return;
-
-  const current_typewriter_char = get_typewriter_char(char_index + 1);
   const key_pressed = e.key;
+  if(currentlyPlaying == 0){
+    if (disallowedCodes.includes(key_pressed)) return;
+    start();
+  };
+  
+  debugLog("RUNNING FUNCTION handleChar")
+  if (currentlyPlaying != 1) return;
+  
+  if (disallowedCodes.includes(key_pressed)) return;
+  if (key_pressed.length !== 1 && !(key_pressed == "Backspace" || key_pressed == "Delete")) return;
+  const current_typewriter_char = get_typewriter_char(char_index + 1);
+  
   let pressedSpace;
 
-  if (disallowedCodes.includes(key_pressed)) return;
-
-  if (key_pressed == "Backspace" || key_pressed == "Delete") {
-    if (get_typewriter_char(char_index).innerText == " " && word_index > 0) {
+  
+  
+  if ((key_pressed == "Backspace" || key_pressed == "Delete")) {
+    if((char_index <= 0)) return;
+    console.log(char_index);
+    
+    if (get_typewriter_char(char_index).innerText == " " && (word_index > 0)) {
       word_index--;
     }
-    if (char_index > 0) {
-      typed.splice(char_index - 1, 1);
-    }
+    console.log("Test");
+    moveCharIndex(-1);
+    typeCount--;
 
-    if (char_index > 0) moveCharIndex(-1);
 
     if (current_typewriter_char.classList.contains("wrong-char")) {
       current_typewriter_char.classList.remove("wrong-char");
@@ -208,19 +315,18 @@ function handleChar(e) {
     current_typewriter_char.classList.remove("correct-char");
     return;
   } else if (key_pressed == " ") {
-    debugLog("== SPACE ==");
     pressedSpace = true;
     if (current_typewriter_char == " ") {
-      debugLog("MOVE WORD INDEX");
       word_index++;
+      typeCount++;
     }
     moveCharIndex(1);
   } else {
-    typed.push(key_pressed);
+    // typed.push(key_pressed);   ARRAY_TYPED
+    typeCount++;
     moveCharIndex(1);
   }
 
-  debugLog("CURRENT CHAR SHOULD BE:", current_typewriter_char.innerText);
   if (
     current_typewriter_char.innerText == key_pressed ||
     (pressedSpace && !current_typewriter_char)
@@ -241,27 +347,15 @@ function handleChar(e) {
     current_typewriter_char.classList.remove("correct-char");
   }
 
-  debugLog(
-    "LENGTH OF TYPE:",
-    typed.length,
-    "LAST LETTER TYPED:",
-    typed[typed.length - 1]
-  );
 
   stats_accuracy.innerText =
-    (((typed.length - wrong_chars) / typed.length) * 100).toFixed(2) + "%";
+    (((typeCount - wrong_chars) / typeCount) * 100).toFixed(2) + "%";
 
-  debugLog(
-    "TYPED",
-    typed,
-    "CHAR_INDEX:",
-    char_index,
-    " | WORD INDEX:",
-    word_index
-  );
 }
-
+// Moves the virtual cursor
+// Parameter {dist} - number - How much to move the cursor
 function moveCharIndex(dist) {
+  debugLog("RUNNING FUNCTION moveCharIndex")
   const prev = document.getElementById(`typewriter-char-${char_index + 1}`);
   if (prev) prev.classList.remove("char_index");
 
@@ -272,17 +366,23 @@ function moveCharIndex(dist) {
 
   updateCursorPosition();
 }
-
+// Calculates the WPM
+// Parameter {chars} - The amount of characters that has been typed altogether
+// Parameter {time} - The amount of time elapsed, which it took to to write the chars
 function calculateWPM(chars, time) {
+  debugLog("RUNNING FUNCTION calculateWPM")
   if (time <= 0) return 0;
   return (60 * chars) / 5 / time;
 }
-
+// Declares the game over
 function gameOver() {
+  debugLog("RUNNING FUNCTION gameOver")
   currentlyPlaying = 2;
+  interval = null;
   debugLog("GAME OVER");
   analyze_mistakes(incorrectly_typed);
 }
+// Moves the cursor position to appropriate place
 function updateCursorPosition() {
   const cursor = document.getElementById("cursor");
   const currentChar = document.getElementById(
@@ -304,26 +404,28 @@ function updateCursorPosition() {
   cursor.style.height = `${charRect.height}px`;
 }
 
+// Parameter: results - an array of objects representing incorrect keypresses.
+// Each object has: { pressed, correct, at } — which are sets of characters and locations used to calculate common mistakes and mistake streaks.
+// Analyzes the mistake made during the game and outputs to screen.
+
 function analyze_mistakes(results) {
   let letter_mistake = {};
   let sequence_mistake = [];
+
   for (let i = 0; i < results.length; i++) {
     const result = results[i];
-    debugLog(result);
-
-    // Find most common character mistake
+    if (!letter_mistake[result.pressed]) {
+      letter_mistake[result.pressed] = 0;
+    }
     letter_mistake[result.pressed] += 1;
-
-    // Find longest sequence of mistakes
     sequence_mistake.push(result.at);
   }
-  // Find longest consecutive sequence:
-  sequence_mistake.sort((a, b) => a < b);
-  let longest_sequence = 0;
-  let current_seq_count = 0;
-  for (let i = 1; i < sequence_mistake.length; i++) {
-    if (sequence_mistake[i] === sequence_mistake[i - 1]) continue;
 
+  // Find longest consecutive mistake sequence
+  sequence_mistake.sort((a, b) => a - b);
+  let longest_sequence = 0;
+  let current_seq_count = 1;
+  for (let i = 1; i < sequence_mistake.length; i++) {
     if (sequence_mistake[i] === sequence_mistake[i - 1] + 1) {
       current_seq_count++;
       longest_sequence = Math.max(longest_sequence, current_seq_count);
@@ -331,5 +433,20 @@ function analyze_mistakes(results) {
       current_seq_count = 1;
     }
   }
-  debugLog(longest_sequence);
+
+  // Output to screen
+  const outputBox = document.getElementById("mistake-list");
+  outputBox.innerHTML = "";
+
+  const mistakesSorted = Object.entries(letter_mistake).sort((a, b) => b[1] - a[1]);
+
+  mistakesSorted.forEach(([char, count]) => {
+    const li = document.createElement("li");
+    li.textContent = `Key "${char}" mistyped ${count} times`;
+    outputBox.appendChild(li);
+  });
+
+  const longestStreak = document.createElement("li");
+  longestStreak.textContent = `Longest streak of consecutive mistakes: ${longest_sequence}`;
+  outputBox.appendChild(longestStreak);
 }

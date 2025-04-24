@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="bg-gradient-to-b from-fuchsia-950 to-pink-900">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,8 +10,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Protest+Strike&family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 </head>
-<body>
-    <main class="bg-gradient-to-b from-fuchsia-950 to-pink-900 text-gray-100 flex flex-col items-center justify-center h-screen gap-2">
+<body class="bg-gradient-to-b from-fuchsia-950 to-pink-900">
+    <main class="text-gray-100 flex flex-col items-center justify-center min-h-screen gap-2">
         <div class="my-2">
             <h3 class="text-3xl">Test your Typing Skills!</h3>
         </div>
@@ -36,14 +36,14 @@
                       </div>
                   
                       <!-- Difficulty Selector (horizontal, connected) -->
-                      <div class="inline-flex rounded-lg overflow-hidden border border-pink-800 bg-pink-900 shadow-sm">
-                        <button class="px-4 py-2 text-sm font-medium text-gray-200 bg-pink-800 hover:bg-pink-700 transition rounded-l-lg flex-1">
+                      <div id="difficulty_selector" class="inline-flex rounded-lg overflow-hidden border border-pink-800 bg-pink-900 shadow-sm">
+                        <button onclick="setDiff(0)" class="px-4 py-2 text-sm font-medium text-gray-200 hover:bg-pink-700 transition rounded-l-lg flex-1">
                           Easy
                         </button>
-                        <button class="px-4 py-2 text-sm font-semibold text-white bg-pink-600 hover:bg-pink-500 transition flex-1">
+                        <button onclick="setDiff(1)" class="px-4 py-2 text-sm font-semibold text-white hover:bg-pink-500 transition flex-1">
                           Medium
                         </button>
-                        <button class="px-4 py-2 text-sm font-medium text-gray-200 bg-pink-800 hover:bg-pink-700 transition rounded-r-lg flex-1">
+                        <button onclick="setDiff(2)" class="px-4 py-2 text-sm font-medium text-gray-200  hover:bg-pink-700 transition rounded-r-lg flex-1">
                           Hard
                         </button>
                       </div>
@@ -51,24 +51,24 @@
                   
                     <!-- Right Column: Time Selector (vertical, connected) -->
                     <div class="flex flex-col items-center justify-center">
-                      <div class="flex flex-col rounded-lg overflow-hidden border border-pink-800 bg-pink-900 shadow-sm">
+                      <div id="time_selector" class="flex flex-col rounded-lg overflow-hidden border border-pink-800 bg-pink-900 shadow-sm">
                         <button
                           onclick="setTime(15)"
                           class="px-4 py-2 text-sm font-medium text-gray-200 hover:bg-pink-700 transition rounded-t-lg"
                         >
-                          30s
+                          15s
                         </button>
                         <button
                           onclick="setTime(30)"
                           class="px-4 py-2 text-sm font-medium text-gray-200 hover:bg-pink-700 transition border-t border-pink-800"
                         >
-                          45s
+                          30s
                         </button>
                         <button
                           onclick="setTime(45)"
                           class="px-4 py-2 text-sm font-medium text-gray-200 hover:bg-pink-700 transition border-t border-pink-800 rounded-b-lg"
                         >
-                          60s
+                          45s
                         </button>
                       </div>
                     </div>
@@ -104,18 +104,19 @@
             <!-- Restart Button -->
             <div class="flex justify-center">
             <button
+                onclick="restart()"
                 id="start"
                 class="bg-pink-600 text-white px-6 py-2 rounded-xl text-lg hover:bg-pink-700 transition shadow-md"
             >
                 🔄 Restart Test
             </button>
             </div>
+            <div id="analysis-output" class="mt-4 p-4 bg-pink-900/30 ring-1 ring-pink-700 text-white rounded shadow max-h-60 overflow-y-auto text-sm">
+              <h3 class="text-lg font-bold mb-2">Mistake Analysis</h3>
+              <ul id="mistake-list" class="list-disc pl-5"></ul>
+            </div>
             
         </div>
-        <footer class="text-center text-md text-gray-500 pb-4 text-pink-500 font-thin">
-          <p>Made by Jarif</p>
-          <p>Read the code at <a href="https://github.com/wuxxy/csp_app" class="text-pink-500 hover:underline">GitHub</a></p>
-        </footer>
 
     </main>
     <script src="index.js"></script>

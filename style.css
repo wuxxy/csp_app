@@ -51,8 +51,26 @@ body {
   user-select: none;
   opacity: 0.8;
   transition: opacity .3s ease;
+  animation: bob 2s ease-in-out infinite;
+
 }
 
 .start-hint.hiddenn {
   opacity: 0;
+}
+@keyframes bob {
+  0%, 100% {
+    padding: 1rem 0;
+  }
+  50% {
+    padding: .5rem 0;
+  }
+}
+#analysis-output {
+  border-radius: 0.5rem;
+  padding: 1rem;
+  color: #fff;
+  font-family: monospace;
+  max-height: 200px;
+  overflow-y: auto;
 }
